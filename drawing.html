@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>在线画板</title>
+		<script src="js/jquery-1.7.1.min.js"></script>
+		<style>
+			#online_drawing {border-style: solid}
+		</style>
+	</head>
+	<body>
+		<canvas id="online_drawing" width="500" height="500">
+			Your browser does not support the canvas element.
+		</canvas>
+		<script type="text/javascript">
+			var canvas = document.getElementById("online_drawing");
+			var ctx = canvas.getContext('2d');
+			ctx.lineWidth = "5";
+			ctx.strokeStyle = "red";
+			var flag = false;
+			$(online_drawing).mousedown(function(e){
+				flag = true;
+				var x = e.pageX - this.offsetLeft;
+				var y = e.pageY - this.offsetTop;
+				ctx.moveTo(x,y);
+				
+			});
+			
+			$(online_drawing).mousemove(function(e){
+				var x = e.pageX - this.offsetLeft;
+				var y = e.pageY - this.offsetTop;
+				if(flag){
+					ctx.lineTo(x,y);
+					ctx.stroke();
+				}
+			});
+			
+			$(online_drawing).mouseup(function(e){
+				flag = false;
+			});
+			
+		</script>
+	</body>
+</html>

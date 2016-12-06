@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<head>
+	<title>canvas画动画</title>
+	<meta charset="UTF-8"/>
+	<script src="js/jquery-1.7.1.min.js"></script>
+</head>
+<body>
+	<canvas id="myCanvas" width="500" height="500">
+		Your browser does not support the canvas element.
+	</canvas>
+	<br />
+	<div id="ds"></div>
+	<script>
+		var canvas = document.getElementById("myCanvas");
+		var ctx = canvas.getContext('2d');
+		var y = 1;
+		var exp = 1;
+		function fff(){
+			ctx.clearRect(0,0,500,500);
+			ctx.fillStyle = "red";
+			ctx.beginPath();
+			ctx.arc(180,y,50,0,Math.PI*2,true);
+			ctx.closePath();
+			ctx.fill();
+			if(y == 0 || y == 500) {
+				exp = exp * -1;
+			}
+			y += exp;
+		}
+	</script>
+	<button onclick="intervalId = setInterval(fff,5)">开始</button>
+	<button onclick="clearInterval(intervalId)">停止</button>
+</body>
+</html>
