@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />  
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />  
+		<script src="http://api.map.baidu.com/api?key=&v=1.1&services=true"></script>  
+		<title></title>
+	</head>
+	<body>
+		<div style="width:697px;height:550px;border:#ccc solid 1px;" id="ditu"></div>
+		<p id="geo_loc"></p>
+		<script type="text/javascript">
+			if(navigator.geolocation){
+				navigator.geolocation.getCurrentPosition(
+				function(p){
+					var map = "维度" + p.coords.latitude + "经度" + p.coords.longitude ;
+					alert("维度" + p.coords.latitude + "经度" + p.coords.longitude );
+					createMap(p.coords.latitude,p.coords.longitude);
+				},
+				function(error){
+					switch(error.code){  
+				        case error.TIMEOUT :  
+				            alert( " 连接超时，请重试 " );  
+				            break;  
+				        case error.PERMISSION_DENIED :  
+				            alert( " 您拒绝了使用位置共享服务，查询已取消 " );  
+				            break;  
+				        case error.POSITION_UNAVAILABLE :   
+				            alert( " ，抱歉，暂时无法为您所在的星球提供位置服务 " );  
+				            break;  
+				    }  
+
+				});
+			}else{
+				alert("你的浏览器不支持geolication")
+			}
+			
+			function createMap(a,b){
+				var map = new BMap.map("ditu");
+				var point = new BMap.Point(b,a);
+				map.centerAndZoom(point,20);
+				window.map = map;
+			}
+		</script>
+	</body>
+</html>
